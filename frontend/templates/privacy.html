@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeIQ - Privacy Policy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reuse your existing CSS variables */
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4bb543;
+            --warning-color: #f0ad4e;
+            --danger-color: #d9534f;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #f5f7ff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+        
+
+        /* Privacy Policy Content Styles */
+        .privacy-section {
+            flex: 1;
+            padding: 80px 0;
+        }
+
+        .privacy-container {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 50px;
+            margin-top: 30px;
+        }
+
+        .privacy-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--dark-color);
+            text-align: center;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .privacy-content h2 {
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            color: var(--primary-color);
+        }
+
+        .privacy-content h3 {
+            font-size: 1.4rem;
+            margin: 25px 0 10px;
+            color: var(--dark-color);
+        }
+
+        .privacy-content p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .privacy-content ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .privacy-content li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .highlight-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .data-table th {
+            background-color: #f2f2f2;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 30px 0 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .privacy-container {
+                padding: 30px 20px;
+            }
+            
+            .privacy-title {
+                font-size: 2rem;
+            }
+            
+            .data-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="/" class="logo">
+                    <i class="fas fa-brain"></i> ResumeIQ
+                </a>
+                <a href="/" class="btn btn-outline">Back to Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Privacy Policy Content -->
+    <section class="privacy-section">
+        <div class="container">
+            <h1 class="privacy-title">Privacy Policy</h1>
+            <p class="last-updated">Last Updated: April 1, 2025</p>
+            
+            <div class="privacy-container">
+                <div class="privacy-content">
+                    <h2>1. Introduction</h2>
+                    <p>ResumeIQ ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our resume analysis and job recommendation services.</p>
+                    
+                    <div class="highlight-box">
+                        <p><strong>Key Point:</strong> By using our Service, you consent to the data practices described in this policy. If you do not agree, please do not access or use our Service.</p>
+                    </div>
+                    
+                    <h2>2. Information We Collect</h2>
+                    <h3>2.1 Personal Information</h3>
+                    <p>We may collect the following personal information:</p>
+                    <ul>
+                        <li>Contact details (name, email address, phone number)</li>
+                        <li>Resume/CV content and metadata</li>
+                        <li>Employment history and education</li>
+                        <li>Skills and professional qualifications</li>
+                        <li>Job preferences and search history</li>
+                    </ul>
+                    
+                    <h3>2.2 Technical Information</h3>
+                    <p>We automatically collect certain information when you visit our website:</p>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data Type</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IP address</td>
+                                <td>Security, analytics</td>
+                            </tr>
+                            <tr>
+                                <td>Browser type</td>
+                                <td>Compatibility optimization</td>
+                            </tr>
+                            <tr>
+                                <td>Usage data</td>
+                                <td>Service improvement</td>
+                            </tr>
+                            <tr>
+                                <td>Cookies</td>
+                                <td>Session management</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h2>3. How We Use Your Information</h2>
+                    <p>We use the information we collect for the following purposes:</p>
+                    <ul>
+                        <li>To provide and maintain our Service</li>
+                        <li>To analyze your resume and provide recommendations</li>
+                        <li>To match you with relevant job opportunities</li>
+                        <li>To improve our algorithms and services</li>
+                        <li>To communicate with you about your account</li>
+                        <li>To detect and prevent fraud</li>
+                        <li>To comply with legal obligations</li>
+                    </ul>
+                    
+                    <h2>4. Data Sharing and Disclosure</h2>
+                    <p>We may share your information in the following situations:</p>
+                    <h3>4.1 With Your Consent</h3>
+                    <p>When you apply for jobs through our platform, we may share your resume with potential employers.</p>
+                    
+                    <h3>4.2 Service Providers</h3>
+                    <p>We may employ third-party companies to facilitate our Service, provide analytics, or assist with customer support.</p>
+                    
+                    <h3>4.3 Legal Requirements</h3>
+                    <p>We may disclose your information if required by law or in response to valid requests by public authorities.</p>
+                    
+                    <h2>5. Data Security</h2>
+                    <p>We implement appropriate technical and organizational measures to protect your personal information, including:</p>
+                    <ul>
+                        <li>Encryption of sensitive data</li>
+                        <li>Regular security audits</li>
+                        <li>Access controls</li>
+                        <li>Secure data storage</li>
+                    </ul>
+                    
+                    <h2>6. Your Data Rights</h2>
+                    <p>Depending on your location, you may have the following rights regarding your personal data:</p>
+                    <ul>
+                        <li><strong>Access:</strong> Request a copy of your data</li>
+                        <li><strong>Rectification:</strong> Correct inaccurate data</li>
+                        <li><strong>Erasure:</strong> Request deletion of your data</li>
+                        <li><strong>Restriction:</strong> Limit how we use your data</li>
+                        <li><strong>Portability:</strong> Request transfer of your data</li>
+                        <li><strong>Objection:</strong> Object to certain processing</li>
+                    </ul>
+                    
+                    <h2>7. Cookies and Tracking Technologies</h2>
+                    <p>We use cookies and similar tracking technologies to:</p>
+                    <ul>
+                        <li>Authenticate users</li>
+                        <li>Remember user preferences</li>
+                        <li>Analyze website traffic</li>
+                    </ul>
+                    <p>You can control cookies through your browser settings.</p>
+                    
+                    <h2>8. International Data Transfers</h2>
+                    <p>Your information may be transferred to — and maintained on — computers located outside of your country where data protection laws may differ.</p>
+                    
+                    <h2>9. Children's Privacy</h2>
+                    <p>Our Service is not intended for users under 16. We do not knowingly collect personal information from children.</p>
+                    
+                    <h2>10. Changes to This Policy</h2>
+                    <p>We may update our Privacy Policy periodically. We will notify you of significant changes via email or through our Service.</p>
+                    
+                    <h2>11. Contact Us</h2>
+                    <p>If you have questions about this Privacy Policy, please contact us at:</p>
+                    <p>Email: privacy@resumeiq.com<br>
+                    Address: 123 Tech Street, San Francisco, CA 94107</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 ResumeIQ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

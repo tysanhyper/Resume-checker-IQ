@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeIQ - Analysis Results</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="/" class="logo">
+                    <i class="fas fa-brain"></i> ResumeIQ
+                </a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/signin" class="btn btn-outline">Sign In</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Results Section -->
+    <section class="results-section">
+        <div class="results-container">
+            <div class="results-header">
+                <h1 class="results-title">Your Resume Analysis Results</h1>
+                <p class="results-subtitle">Based on our AI-powered analysis, here's how your resume performs and what you can improve.</p>
+            </div>
+            
+            <!-- Scores -->
+            <div class="results-grid">
+                <div class="score-card">
+                    <h3 class="score-title">Overall Score</h3>
+                    <div class="score-value" id="overall-score">0</div>
+                    <p class="score-description">How well your resume performs overall</p>
+                </div>
+                
+                <div class="score-card">
+                    <h3 class="score-title">ATS Compatibility</h3>
+                    <div class="score-value" id="ats-score">0</div>
+                    <p class="score-description">How well your resume will perform in Applicant Tracking Systems</p>
+                </div>
+                
+                <div class="score-card">
+                    <h3 class="score-title">Content Quality</h3>
+                    <div class="score-value" id="content-score">0</div>
+                    <p class="score-description">The quality and relevance of your resume content</p>
+                </div>
+            </div>
+            
+            <!-- Skills -->
+            <h2 class="section-title">Skills Identified</h2>
+            <div class="skills-container" id="skills-container">
+                <!-- Skills will be populated by JavaScript -->
+            </div>
+            
+            <!-- Suggestions -->
+            <h2 class="section-title">Improvement Suggestions</h2>
+            <div class="suggestions-container" id="suggestions-container">
+                <!-- Suggestions will be populated by JavaScript -->
+            </div>
+            
+            <!-- Job Recommendations -->
+            <h2 class="section-title">Job Recommendations</h2>
+            <div class="jobs-container" id="jobs-container">
+                <!-- Job recommendations will be populated by JavaScript -->
+            </div>
+            
+            <!-- Download Report Button -->
+            <div style="text-align: center; margin-top: 3rem;">
+                <button id="download-report" class="btn">
+                    <i class="fas fa-download"></i> Download Full Report
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ResumeIQ</h3>
+                    <p>AI-powered resume analysis and job matching platform.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="/about">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ResumeIQ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get results from localStorage
+            const resultsData = localStorage.getItem('resumeResults');
+            
+            if (!resultsData) {
+                // If no results found, redirect to home page
+                window.location.href = '/';
+                return;
+            }
+            
+            const results = JSON.parse(resultsData);
+            
+            // Display scores
+            document.getElementById('overall-score').textContent = results.scores.overall;
+            document.getElementById('ats-score').textContent = results.scores.ats;
+            document.getElementById('content-score').textContent = results.scores.content;
+            
+            // Display skills
+            const skillsContainer = document.getElementById('skills-container');
+            if (skillsContainer && results.skills) {
+                skillsContainer.innerHTML = '';
+                results.skills.forEach(skill => {
+                    const skillElement = document.createElement('div');
+                    skillElement.className = 'skill-item';
+                    skillElement.innerHTML = `
+                        <div class="skill-name">${skill.name}</div>
+                        <div class="skill-score">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: ${skill.score}%"></div>
+                            </div>
+                            <span>${skill.score}%</span>
+                        </div>
+                    `;
+                    skillsContainer.appendChild(skillElement);
+                });
+            }
+            
+            // Display suggestions
+            const suggestionsContainer = document.getElementById('suggestions-container');
+            if (suggestionsContainer && results.suggestions) {
+                suggestionsContainer.innerHTML = '';
+                results.suggestions.forEach(suggestion => {
+                    const suggestionElement = document.createElement('div');
+                    suggestionElement.className = 'suggestion-item';
+                    suggestionElement.innerHTML = `
+                        <div class="suggestion-category">${suggestion.category}</div>
+                        <div class="suggestion-text">${suggestion.text}</div>
+                    `;
+                    suggestionsContainer.appendChild(suggestionElement);
+                });
+            }
+            
+            // Display job recommendations
+            const jobsContainer = document.getElementById('jobs-container');
+            if (jobsContainer && results.jobs) {
+                jobsContainer.innerHTML = '';
+                results.jobs.forEach(job => {
+                    const jobElement = document.createElement('div');
+                    jobElement.className = 'job-card';
+                    jobElement.innerHTML = `
+                        <h3 class="job-title">${job.title}</h3>
+                        <div class="job-company">${job.company}</div>
+                        <div class="job-location">${job.location}</div>
+                        <div class="job-match">
+                            <div class="match-label">Match Score:</div>
+                            <div class="match-score">${job.match}%</div>
+                        </div>
+                        <a href="${job.url}" target="_blank" class="btn btn-apply">Apply Now</a>
+                    `;
+                    jobsContainer.appendChild(jobElement);
+                });
+            }
+            
+            // Download report button
+            document.getElementById('download-report').addEventListener('click', function() {
+                alert('Report download feature coming soon!');
+            });
+        });
+    </script>
+</body>
+</html> 
