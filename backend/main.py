@@ -5,6 +5,8 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 import os, tempfile, traceback, logging, fitz
 import docx2txt
+from PIL import Image
+import pytesseract
 
 # Setup logging
 logging.basicConfig(level=logging.DEBUG)
@@ -113,6 +115,13 @@ async def upload_resume(file: UploadFile = File(...)):
         elif ext == "txt":
             with open(tmp_path, "r", encoding="utf-8", errors="ignore") as f:
                 text = f.read()
+        elif ext in ("png", "jpg", "jpeg"):
+            try:
+                image = Image.open(tmp_path)
+                text = pytesseract.image_to_string(image)
+            except Exception as e:
+                logger.error(f"Error processing image: {str(e)}")
+                raise
         else:
             return {"error": f"Unsupported file format: {ext}"}
 
@@ -200,3 +209,9 @@ async def upload_resume(file: UploadFile = File(...)):
 @app.get("/health")
 async def health_check():
     return {"status": "ok", "message": "ResumeIQ API is running"}
+
+@app.get("/welcome")
+async def welcome(request: Request):
+    """Returns a welcome message and logs request metadata"""
+    logger.info(f"Request received: {request.method} {request.url.path}")
+    return {"message": "Welcome to the ResumeIQ API!"}

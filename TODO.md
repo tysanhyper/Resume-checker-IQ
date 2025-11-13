@@ -1,0 +1,9 @@
+- [x] Edit backend/main.py to add the new GET endpoint /welcome that logs request metadata and returns welcome JSON.
+- [x] Test the new endpoint by making a request to /welcome and verify logs.
+- [x] Test additional endpoints: /health, /, /about, /contact, /signin, /signup, /terms, /privacy, /forgotpassword, /results.
+- [x] Make the application Netlify-friendly by converting to static site with API routes.
+- [x] Create netlify.toml configuration file for deployment.
+- [x] Create package.json for build process.
+- [x] Create .nvmrc for Node.js version specification.
+- [x] Build static site in dist/ directory.
+- [x] Update README.md with Netlify deployment instructions.

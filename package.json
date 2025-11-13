@@ -1,0 +1,23 @@
+{
+  "name": "resumeiq",
+  "version": "1.0.0",
+  "description": "AI-Powered Resume Analyzer & Job Recommender",
+  "main": "index.js",
+  "scripts": {
+    "build": "mkdir -p dist && cp -r frontend/templates/* dist/ && cp -r frontend/static dist/ && cp netlify.toml dist/",
+    "dev": "python run.py",
+    "start": "python run.py"
+  },
+  "keywords": [
+    "resume",
+    "analyzer",
+    "ai",
+    "job",
+    "matching"
+  ],
+  "author": "ResumeIQ Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
