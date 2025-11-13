@@ -4,7 +4,7 @@
   "description": "AI-Powered Resume Analyzer & Job Recommender",
   "main": "index.js",
   "scripts": {
-    "build": "mkdir -p dist && cp -r frontend/templates/* dist/ && cp -r frontend/static dist/ && cp netlify.toml dist/",
+    "build": "mkdir -p dist && cp -r frontend/templates/* dist/ && cp -r frontend/static dist/ && cp netlify.toml dist/ && cp .python-version dist/",
     "dev": "python run.py",
     "start": "python run.py"
   },
