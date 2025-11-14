@@ -1,5 +1,6 @@
 import requests
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -24,8 +25,8 @@ def get_real_jobs(skill, country="in"):
             "remote_jobs_only": "false"
         }
         headers = {
-            "x-rapidapi-key": "YOUR RAPIDAPI KEY",
-            "x-rapidapi-host": "YOUR RAPIDAPI HOST"
+            "x-rapidapi-key": os.getenv("RAPIDAPI_KEY"),
+            "x-rapidapi-host": os.getenv("RAPIDAPI_HOST", "jsearch.p.rapidapi.com")
         }
 
         response = requests.get(url, headers=headers, params=querystring, timeout=10)

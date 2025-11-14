@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+sFROM python:3.9-slim
 
 # Set working directory
 WORKDIR /app
@@ -10,6 +10,7 @@ ENV PYTHONUNBUFFERED 1
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
+    tesseract-ocr \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements file

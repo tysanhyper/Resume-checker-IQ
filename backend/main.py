@@ -89,60 +89,80 @@ async def upload_resume(file: UploadFile = File(...)):
     logger.info(f"Received resume upload: {file.filename}")
     tmp_path = None
     text = ""
-    
+
     try:
+        logger.info("Reading file contents...")
         contents = await file.read()
+        logger.info(f"File size: {len(contents)} bytes")
         if not contents:
+            logger.error("Uploaded file is empty")
             return {"error": "The uploaded file is empty"}
-            
+
         ext = file.filename.split('.')[-1].lower()
         logger.info(f"File extension: {ext}")
 
+        logger.info("Creating temporary file...")
         with tempfile.NamedTemporaryFile(delete=False, suffix=f".{ext}") as tmp:
             tmp.write(contents)
             tmp_path = tmp.name
+        logger.info(f"Temporary file created: {tmp_path}")
 
         # Extract text based on file type
+        logger.info(f"Extracting text from {ext} file...")
         if ext == "pdf":
             try:
+                logger.info("Processing PDF with fitz...")
                 with fitz.open(tmp_path) as doc:
                     text = "\n".join(page.get_text() for page in doc)
+                logger.info(f"PDF processed, extracted {len(text)} characters")
             except Exception as e:
                 logger.error(f"Error processing PDF: {str(e)}")
                 raise
         elif ext in ("docx", "doc"):
+            logger.info("Processing DOCX with docx2txt...")
             text = docx2txt.process(tmp_path)
+            logger.info(f"DOCX processed, extracted {len(text)} characters")
         elif ext == "txt":
+            logger.info("Reading TXT file...")
             with open(tmp_path, "r", encoding="utf-8", errors="ignore") as f:
                 text = f.read()
+            logger.info(f"TXT processed, extracted {len(text)} characters")
         elif ext in ("png", "jpg", "jpeg"):
             try:
+                logger.info("Processing image with OCR...")
                 image = Image.open(tmp_path)
                 text = pytesseract.image_to_string(image)
+                logger.info(f"Image processed, extracted {len(text)} characters")
             except Exception as e:
                 logger.error(f"Error processing image: {str(e)}")
                 raise
         else:
+            logger.error(f"Unsupported file format: {ext}")
             return {"error": f"Unsupported file format: {ext}"}
 
         if not text.strip():
+            logger.error("No text could be extracted from the file")
             return {"error": "No text could be extracted from the file"}
 
-        # Process the resume
+        logger.info("Extracting resume data...")
         data = extract_resume_data(text)
-        
-        # Calculate scores
+        logger.info(f"Extracted data: skills={len(data.get('skills', []))}")
+
+        logger.info("Calculating scores...")
         score, missing_skills, skill_categories = score_resume(data["skills"])
         ats_score_data = calculate_ats_score(text, data["skills"])
-        
-        # Get job recommendations
+        logger.info(f"Scores calculated: overall={score}, ats={ats_score_data['ats_score']}")
+
+        logger.info("Fetching job recommendations...")
         first_skill = data["skills"][0] if data["skills"] else "developer"
         indian_jobs = get_real_jobs(first_skill, country="in")
         us_jobs = get_real_jobs(first_skill, country="us")
-        
-        # Get improvement suggestions
+        logger.info(f"Jobs fetched: {len(indian_jobs)} IN, {len(us_jobs)} US")
+
+        logger.info("Generating suggestions...")
         improvement = suggest_improvements(text)
-        
+        logger.info("Suggestions generated")
+
         # Format suggestions properly
         formatted_suggestions = []
         if isinstance(improvement, dict) and "suggestions" in improvement:
@@ -168,6 +188,7 @@ async def upload_resume(file: UploadFile = File(...)):
         else:
             formatted_suggestions = [{"category": "General", "text": str(improvement)}]
 
+        logger.info("Preparing response data...")
         response_data = {
             "scores": {
                 "overall": score,
@@ -190,19 +211,21 @@ async def upload_resume(file: UploadFile = File(...)):
             ]
         }
 
+        logger.info("Upload processing completed successfully")
         return response_data
 
     except Exception as e:
         logger.error(f"Error processing resume: {str(e)}")
         logger.error(traceback.format_exc())
         return {"error": f"Error processing resume: {str(e)}"}
-        
+
     finally:
         if tmp_path and os.path.exists(tmp_path):
             try:
                 import time
                 time.sleep(0.1)
                 os.unlink(tmp_path)
+                logger.info(f"Temporary file removed: {tmp_path}")
             except Exception as e:
                 logger.warning(f"Failed to remove temporary file {tmp_path}: {str(e)}")
 
