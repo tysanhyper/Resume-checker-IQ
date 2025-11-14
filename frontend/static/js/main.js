@@ -79,11 +79,19 @@ function setupResumeUpload() {
             
             fetch("/upload_resume/", {
                 method: "POST",
-                body: formData
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
             })
             .then(response => {
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    return response.text().then(text => {
+                        console.error('Error response:', text);
+                        throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
+                    });
                 }
                 return response.json();
             })

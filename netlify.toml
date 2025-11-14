@@ -11,21 +11,27 @@
   from = "/api/*"
   to = "https://resumeiq-api.onrender.com/:splat"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/upload_resume/"
   to = "https://resumeiq-api.onrender.com/upload_resume/"
   status = 200
+  force = true
+  headers:
+    Accept: "application/json"
 
 [[redirects]]
   from = "/health"
   to = "https://resumeiq-api.onrender.com/health"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/welcome"
   to = "https://resumeiq-api.onrender.com/welcome"
   status = 200
+  force = true
 
 [[headers]]
   for = "/*"
